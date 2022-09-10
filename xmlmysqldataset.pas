@@ -83,7 +83,7 @@ begin
           begin
             if Fields[i].OldValue <> Fields[i].NewValue then
               case Fields[i].DataType of
-                ftString, ftBlob: SQL :=
+                ftString, ftBlob, ftMemo: SQL :=
                     SQL + InternalSeparateRight(Fields[i].FieldName, '.') +
                     '=' + QuotedStr(Fields[i].AsString) + ', ';
                 ftInteger, ftSmallint, ftBCD, ftFloat: SQL :=
@@ -113,7 +113,7 @@ begin
           for i := 1 to FieldCount - 1 do
           begin
             case Fields[i].DataType of
-              ftString, ftBlob: SQL := SQL + QuotedStr(Fields[i].AsString);
+              ftString, ftBlob, ftMemo: SQL := SQL + QuotedStr(Fields[i].AsString);
               ftInteger, ftSmallint, ftBCD, ftFloat: SQL := SQL + Fields[i].AsString;
               ftDateTime, ftDate, ftTime:
                 SQL := SQL + QuotedStr(FormatDateTime('yyyy-mm-dd hh.nn.ss',
